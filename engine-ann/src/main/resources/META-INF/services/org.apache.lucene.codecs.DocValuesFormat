@@ -1,2 +1,2 @@
-com.vdian.search.ann.lucene.codecs.AnnDocValuesFormat
+com.morphism.search.ann.lucene.codecs.AnnDocValuesFormat
 org.apache.lucene.codecs.lucene50.Lucene50DocValuesFormat

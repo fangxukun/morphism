@@ -1,13 +1,11 @@
 package com.vdian.search.netty.demo.benchmark;
 
-import com.vdian.search.netty.common.NoResponseException;
-import com.vdian.search.netty.server.bootstrap.FileBootstrap;
+import com.morphism.search.netty.common.NoResponseException;
+import com.morphism.search.netty.server.bootstrap.FileBootstrap;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * User: xukun.fyp

@@ -20,18 +20,18 @@
   2. solrConfig.xml中增加配置:
     ```xml
     <!-- 用于计算annDistance的ValueSource -->
-    <valueSourceParser name="annParser" class="com.vdian.search.ann.lucene.function.AnnValueSourceParser" />
+    <valueSourceParser name="annParser" class="AnnValueSourceParser" />
     ```
     ```xml
     <!-- Ann Query的定制 -->
-    <queryParser name="ann" class="com.vdian.search.ann.lucene.query.AnnQParserPlugin"/>
+    <queryParser name="ann" class="AnnQParserPlugin"/>
     ```
   3. schema.xml中的配置:
     ```xml
     <!--
       Schema中FieldType,Field配置。
       class:      VectorStringField:可以通过字符串传入vector形如："2.323,4.323,0.344,4.34"
-                  VectorBytesField:直接传入Bytep[]数据,com.vdian.search.ann.BytesUtils#floatsToBytes,可以用来转换
+                  VectorBytesField:直接传入Bytep[]数据,BytesUtils#floatsToBytes,可以用来转换
 
       dataType:   BYTE/SHORT/FLOAT,原始数据都是float，在内部存储时可以转换为byte或者short可以节省存储空间(1/4,1/2)。
 
@@ -43,14 +43,14 @@
 
       numOfTree:        5 构建索引时build的annTree数量，数量越大准确率越高，索引性能越差，建议:[5~80]
     -->
-    <fieldType class="com.vdian.search.ann.solr.schema.VectorStringField" dataType="BYTE"  docValues="true" docValuesFormat="ann" leafNodeMaxItem="64" name="vector" numOfTree="5"/>
+    <fieldType class="VectorStringField" dataType="BYTE"  docValues="true" docValuesFormat="ann" leafNodeMaxItem="64" name="vector" numOfTree="5"/>
 
     <field docValues="true" indexed="true" multiValued="false" name="image_features" required="false" stored="true" type="vector"/>
     ```
 
 ### 代码相关:
-  * 查询入口:com.vdian.search.ann.lucene.query.AnnVectorQuery
-  * 索引入口:com.vdian.search.ann.lucene.codecs.AnnDocValuesFormat
+  * 查询入口:AnnVectorQuery
+  * 索引入口:AnnDocValuesFormat
   * Codec自定义:目前lucene不是很方便自定义Format，只能使用已经存在的集中形式进行定制，如DocValueFormat,PostingFormat，否则需要修改DefaultIndexingChain以及众多的代码。
   * Solr/Lucene的Schema中FileType配置透传:比较坑，基本没有方式能够传递到自定义处理类里面，目前通过全局变量来实现。
   * Merge:默认的lucene indexWriter.forceMerge,是不会识别自定义的Codec.需要在离线索引时做好设置。

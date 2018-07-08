@@ -10,7 +10,7 @@
         </fieldType>
         <fieldType class="solr.TrieIntField" name="int" positionIncrementGap="0" precisionStep="0"/>
         <fieldType class="solr.StrField" name="string" omitNorms="true" sortMissingLast="true"/>
-        <fieldType class="com.vdian.search.ann.solr.schema.VectorStringField" dataType="BYTE" diskIndex="false" docValues="true" docValuesFormat="ann" leafNodeMaxItem="64" name="vector" numOfTree="5"/>
+        <fieldType class="com.morphism.search.ann.solr.schema.VectorStringField" dataType="BYTE" diskIndex="false" docValues="true" docValuesFormat="ann" leafNodeMaxItem="64" name="vector" numOfTree="5"/>
     </types>
     <fields>
         <field docValues="false" indexed="true" multiValued="false" name="_biz_version_" required="true" stored="true" type="long"/>

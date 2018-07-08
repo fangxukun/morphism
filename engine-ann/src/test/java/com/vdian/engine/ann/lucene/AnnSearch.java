@@ -3,8 +3,8 @@
 //import com.google.common.base.Preconditions;
 //import com.google.common.base.Stopwatch;
 //import com.vdian.engine.ann.*;
-//import com.vdian.search.ann.AnnLayout;
-//import com.vdian.search.ann.DataType;
+//import AnnLayout;
+//import DataType;
 //import org.apache.commons.lang3.tuple.Pair;
 //import org.junit.Assert;
 //import org.junit.Before;
@@ -121,7 +121,7 @@
 //		if(rebuild){
 //			core = new SolrAnnCore(rebuild);
 //			for(int i=0;i<size;i++){
-//				com.vdian.search.ann.Item item = new com.vdian.search.ann.Item(i,vectors.get(i));
+//				Item item = new Item(i,vectors.get(i));
 //				core.addItem(item);
 //			}
 //			core.buildIndex(numOfTree);		//notwork

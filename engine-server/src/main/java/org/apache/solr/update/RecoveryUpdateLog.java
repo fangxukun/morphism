@@ -1,6 +1,6 @@
 package org.apache.solr.update;
 
-import com.vdian.engine.server.engine.data.TLogs;
+import com.morphism.engine.server.engine.data.TLogs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -51,8 +51,8 @@
     </updateRequestProcessorChain>
 
 
-    <valueSourceParser name="annParser" class="com.vdian.search.ann.lucene.function.AnnValueSourceParser" />
-    <queryParser name="ann" class="com.vdian.search.ann.lucene.query.AnnQParserPlugin"/>
+    <valueSourceParser name="annParser" class="com.morphism.search.ann.lucene.function.AnnValueSourceParser" />
+    <queryParser name="ann" class="com.morphism.search.ann.lucene.query.AnnQParserPlugin"/>
 
     <!-- Legacy config for the admin interface -->
     <admin>

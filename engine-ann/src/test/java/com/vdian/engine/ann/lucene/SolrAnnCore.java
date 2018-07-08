@@ -6,9 +6,9 @@
 //import com.google.gson.JsonElement;
 //import com.google.gson.JsonObject;
 //import com.koudai.rio.commons.utils.GsonUtils;
-//import com.vdian.search.ann.BytesUtils;
-//import com.vdian.search.ann.Item;
-//import com.vdian.search.ann.algorithm.FloatCalculator;
+//import BytesUtils;
+//import Item;
+//import FloatCalculator;
 //import org.apache.commons.lang.math.RandomUtils;
 //import org.apache.solr.client.solrj.SolrQuery;
 //import org.apache.solr.common.SolrInputDocument;

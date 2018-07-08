@@ -1,9 +1,9 @@
 package com.vdian.search.netty.demo;
 
-import com.vdian.search.netty.client.NettyClient;
-import com.vdian.search.netty.common.ClientLayout;
-import com.vdian.search.netty.common.RequestContext;
-import com.vdian.search.netty.server.bootstrap.FileBootstrap;
+import com.morphism.search.netty.client.NettyClient;
+import com.morphism.search.netty.common.ClientLayout;
+import com.morphism.search.netty.common.RequestContext;
+import com.morphism.search.netty.server.bootstrap.FileBootstrap;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.request.AbstractUpdateRequest;
