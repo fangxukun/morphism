@@ -1,0 +1,59 @@
+package com.vdian.search.netty.protocol;
+
+option java_package="com.vdian.search.netty.protocol";
+option java_outer_classname="SolrProtocol";
+
+//1.SolrRequest
+message SolrRequest {
+	required string 				collection 		= 1;
+	required string 				path			= 2;
+	repeated SolrParam				solrParam		= 3;
+	repeated ContentStream			contentStream	= 4;
+}
+
+message SolrParam{
+	required string					key				= 1;
+	repeated string	 				values			= 2;
+}
+
+message ContentStream{
+	optional string 				name			= 1;
+	optional string 				sourceInfo		= 2;
+	optional string 				contentType		= 3;
+	optional int64					size			= 4;
+	optional bytes					stream			= 5;
+}
+
+//2.SolrResponse
+message SolrResponse{
+	required ResponseBody			responseBody	= 1;
+	repeated ExceptionBody			exceptionBody	= 2;
+}
+
+message ResponseBody{
+	required string 				contentType		= 1;
+	required bytes					body			= 2;
+}
+
+message ExceptionBody{
+	optional int32					code			= 1;
+	optional string					message			= 2;
+}
+
+
+//3.NettyRequest
+message NettyRequest{
+	required int64					rid				= 1;	//request Id 每个请求一个
+	required int64					cid				= 2;	//connect Id 每个远程连接一个(如果批量请求 1个rid => N cid)
+	required string					requestIp		= 3;	//请求发起方的Ip
+	required SolrRequest			solrRequest		= 4;
+}
+
+//4.NettyResponse
+message NettyResponse{
+	required int64					rid				= 1;	//request Id 每个请求一个
+    required int64					cid				= 2;	//connect Id 每个远程连接一个(如果批量请求 1个rid => N cid)
+    required string 				responseIp		= 3;
+    required bool					success			= 4;
+	required SolrResponse			solrResponse	= 5;
+}

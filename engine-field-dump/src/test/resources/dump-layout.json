@@ -1,0 +1,23 @@
+{
+//    "provider":"HDFS",
+    "provider":"LOCAL",
+    "proxy":true,
+//    "remotePath":"/data/result/hive/hzsearch/docvalue/",
+    "delimiter":"\t",
+    "localPath":"/data/local/",
+    "coreName":"vitem",
+    "keyField":{
+        "index":0,
+        "fieldName":"item_id"
+    },
+    "updateFields":[
+        {
+            "index":1,
+            "fieldName":"price"
+        },
+        {
+            "index":2,
+            "fieldName":"stock"
+        }
+    ]
+}

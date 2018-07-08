@@ -1,0 +1,28 @@
+<configuration scan="true">
+
+    <property name="pattern" value="%d %p [%t] %c{36} - %m%n"/>
+    <property name="log.root" value="/home/www/logs/${appName}"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %level [%thread] %logger{20} %X{traceId:--} [%X{collection} %X{shard} %X{replica} %X{core}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="DEFAULT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.root}/${appName}.log</file>
+        <append>false</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.root}/${appName}.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d %p [%t] %c{36} - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="DEFAULT"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

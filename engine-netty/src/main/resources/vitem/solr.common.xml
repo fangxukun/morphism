@@ -1,0 +1,16 @@
+<solr>
+    <shardHandlerFactory name="shardHandlerFactory"
+                         class="HttpShardHandlerFactory">
+        <int name="socketTimeout">${socketTimeout:600000}</int>
+        <int name="connTimeout">${connTimeout:60000}</int>
+    </shardHandlerFactory>
+
+    <logging>
+        <str name="class">org.vootoo.logging.logback.LogbackWatcher</str>
+        <bool name="enabled">true</bool>
+        <watcher>
+            <int name="size">100</int>
+            <str name="threshold">ERROR</str>
+        </watcher>
+    </logging>
+</solr>

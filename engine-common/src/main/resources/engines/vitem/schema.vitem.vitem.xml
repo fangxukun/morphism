@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema name="vitem" version="1.1">
+    <uniqueKey>item_id</uniqueKey>
+    <solrQueryParser defaultOperator="AND"/>
+
+    <types>
+        <fieldType class="solr.TrieLongField" name="long" positionIncrementGap="0" precisionStep="0"/>
+        <fieldType autoGeneratePhraseQueries="false" class="solr.TextField" name="text_ik">
+            <analyzer class="org.wltea.analyzer.lucene.IKAnalyzerWithSmart" type="query"/>
+            <analyzer class="org.wltea.analyzer.lucene.IKAnalyzerWithOutSmart" type="index"/>
+        </fieldType>
+    </types>
+
+    <fields>
+        <field docValues="false" indexed="true" multiValued="false" name="_version_" required="false" stored="true"
+               type="long"/>
+        <field docValues="false" indexed="true" multiValued="false" name="item_id" required="true" stored="true"
+               type="long"/>
+        <field docValues="false" indexed="true" multiValued="false" name="item_title" required="false" stored="true"
+               type="text_ik"/>
+    </fields>
+</schema>

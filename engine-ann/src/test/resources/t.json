@@ -1,0 +1,44 @@
+{
+    "name": "vision",
+    "engine-provider": {
+        "engine-service-name": "vision",
+        "request-hash-route": false,
+        "zookeeper-connect-url": "zk1.daily.idcvdian.com,zk2.daily.idcvdian.com,zk3.daily.idcvdian.com"
+    },
+    "recall-plan": {
+        "default-origin-fl": "*,score",
+        "recall-num-for-merge": 100,
+        "id-recall-allow-fields": "fq:status,mask_tag;fl:promotion",
+        "recall-num-for-refined": 100,
+        "id-recall-filter":true,
+        "recall-fl": "item_id,score"
+    },
+    "recall": {
+        "http-thread-size": 5,
+        "work-thread-num": 8,
+        "id-field": "item_id",
+        "recall-timeout": 10000,
+        "tolerance-failed-request": 0,
+        "tolerance-failed-connect": 0
+    },
+    "recall-cache": {
+        "enable": false,
+        "cache-max-size": 40000,
+        "expire-time": 1800,
+        "ignore-params": "start,rows,uuid,serviceUserId",
+        "byte-cache": true,
+        "stat-freq": 1
+    },
+    "merge": {
+        "score-field": "score"
+    },
+    "merge-server": {
+        "merge-server-class": "com.vdian.vsearch.illusion.SolrMergeServer",
+        "engine-provider-class": "com.vdian.vsearch.illusion.provider.ZookeeperProvider",
+        "recall-plan-class": "com.vdian.vsearch.illusion.plan.FixRecallPlan",
+        "recall-class": "com.vdian.vsearch.illusion.recall.NettyRecallV2",
+        "merger-class": "com.vdian.vsearch.illusion.merge.CompoundMerger",
+        "intervention-class": "com.vdian.vsearch.illusion.intervene.CompoundIntervention",
+        "field-complete-class": "com.vdian.vsearch.illusion.spit.RecallComplete"
+    }
+}

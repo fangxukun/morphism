@@ -1,0 +1,1068 @@
+{
+  "rules": [
+    {
+      "rule-id": 1,
+      "description": "北京分控商品",
+      "description-detail": "北京分控商品数据[@杨亮],直接对商品做全市场屏蔽处理",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_item_base_mask/pt=${date:yyyy-MM-dd,-1}/",
+      "apply-punish-history": "false",
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputVdianTrimLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 2,
+      "description": "北京分控店铺",
+      "description-detail": "北京分控店铺数据[@杨亮],直接对这些店铺的所有商品做全市场屏蔽处理",
+      "input-path": "hdfs://argo/data/rawlog/vc/mask_search_shop/day=${date:yyyy-MM-dd,-1}/",
+      "apply-punish-history": "false",
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputVdianTrimLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.SELLER"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 3,
+      "description": "邮费商品",
+      "description-detail": "邮费类目下商品数据[@江云辉],对邮费商品在全部市场做屏蔽处理",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_item_category_predict/pt=${date:yyyy-MM-dd,-2}/",
+      "apply-punish-history": "false",
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "3"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "Equal",
+          "arguments": [
+            "9",
+            "50023725"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 4,
+      "description": "食品屏蔽",
+      "description-detail": "食品类目中没有资质的卖家的商品进行屏蔽[@王进,@孙烨,@毛凯]",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/shield_food_item/${latest}",
+      "apply-punish-history": "false",
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "1"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 5,
+      "description": "分销Recommend",
+      "description-detail": "分销推荐度<0的商品做屏蔽[@孟佳]",
+      "input-path": "hdfs://argo/user/hive/warehouse/di.db/vshop_fx_supply_item",
+      "apply-punish-history": "false",
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "1"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.FENXIAO"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "2"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "LessThan",
+          "arguments": [
+            "2",
+            "0"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 6,
+      "description": "非主流价格",
+      "description-detail": "主流价格模型[杭州,@大鹏],对非主流价格进行屏蔽",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_item_basic_info/${latest}/",
+      "apply-punish-history": "false",
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "5"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "LessThan",
+          "arguments": [
+            "41",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 7,
+      "description": "非主流销量",
+      "description-detail": "主流销量模型[杭州,@大鹏],对非主流价格进行屏蔽",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_item_basic_info/${latest}/",
+      "apply-punish-history": "false",
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "6"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "LessThan",
+          "arguments": [
+            "42",
+            "1"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 8,
+      "description": "黑名单",
+      "description-detail": "手工黑名单数据",
+      "input-path": "hdfs://argo//user/hive/warehouse/hzsearch.db/fox/blacklist/${latest}/",
+      "apply-punish-history": "false",
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "3"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "InputEnum",
+          "arguments": [
+            "TargetType",
+            "1"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "InputEnum",
+          "arguments": [
+            "Market",
+            "2"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "InputDate",
+          "arguments": [
+            "yyyy-MM-dd HH:mm:ss",
+            "5"
+          ]
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "7"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "BlackWhiteCollect",
+          "arguments": [
+            "1",
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 9,
+      "description": "白名单",
+      "description-detail": "手工白名单数据",
+      "input-path": "hdfs://argo//user/hive/warehouse/hzsearch.db/fox/whitelist/${latest}/",
+      "apply-punish-history": "false",
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "3"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "InputEnum",
+          "arguments": [
+            "TargetType",
+            "1"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "InputEnum",
+          "arguments": [
+            "Market",
+            "2"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "InputDate",
+          "arguments": [
+            "yyyy-MM-dd HH:mm:ss",
+            "5"
+          ]
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "7"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "BlackWhiteCollect",
+          "arguments": [
+            "1",
+            "4"
+          ]
+        },
+        {
+          "name": "isWhite",
+          "interpreter": "ConstBoolean",
+          "arguments": [
+            "true"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 10,
+      "description": "存量刷单B",
+      "description-detail": "杭州刷单数据[存量-B](@钰雯)",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dt_history_shuadan_filter_output_for_search",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "1"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.VDIAN_BUYER"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "9"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "Equal",
+          "arguments": [
+            "7",
+            "B"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 11,
+      "description": "存量刷单降权",
+      "description-detail": "杭州刷单数据[对于A/B两类统一做综合排序降权](@钰雯)",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dt_history_shuadan_filter_output_for_search",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "1"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.VDIAN_BUYER",
+            "Market.VDIAN_MM",
+            "Market.GLOBAL",
+            "Market.WEIXIN_ACCOUNT",
+            "Market.BANJIA"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "14"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 12,
+      "description": "增量刷单B",
+      "description-detail": "杭州刷单数据[增量-B](@钰雯)",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_shuadan_filter_output_for_search/${latest}",
+      "apply-punish-history": true,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "1"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.VDIAN_BUYER"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "9"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "Equal",
+          "arguments": [
+            "7",
+            "B"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 13,
+      "description": "增量刷单降权",
+      "description-detail": "杭州刷单数据[对于A/B两类统一做综合排序降权](@钰雯)",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_shuadan_filter_output_for_search/${latest}",
+      "apply-punish-history": true,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "1"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.VDIAN_BUYER",
+            "Market.VDIAN_MM",
+            "Market.GLOBAL",
+            "Market.WEIXIN_ACCOUNT",
+            "Market.BANJIA"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "14"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 14,
+      "description": "非实名认证店铺",
+      "description-detail": "买家版屏蔽非实名认证店铺",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_seller_basic_feature/pt=${date:yyyy-MM-dd,-2}/",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.SELLER"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.VDIAN_BUYER",
+            "Market.WEIXIN_ACCOUNT"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "12"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "NotRealAuth",
+          "arguments": [
+            "45",
+            "31"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 16,
+      "description": "非活跃卖家屏蔽",
+      "description-detail": "30天非活跃卖家屏蔽[@泳江],所有排序",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_mask_set/pt=${date:yyyy-MM-dd,-1}/type=wdbuyer_nonactive/",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.SELLER"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.VDIAN_BUYER",
+            "Market.WEIXIN_ACCOUNT",
+            "Market.FENXIAO"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "16"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 17,
+      "description": "全店分销商自营商品屏蔽",
+      "description-detail": "全店分销商自营商品屏蔽,所有排序屏蔽",
+      "input-path": "hdfs://argo/user/www/ods/ods_item_fx_seller_map/${latest}",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "1"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.SELLER"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "20"
+          ]
+        },
+        {
+          "name": "needCollect",
+          "interpreter": "GlobalShopRetail",
+          "arguments": [
+            "3",
+            "5"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 18,
+      "description": "退款率过高屏蔽",
+      "description-detail": "对退款率过高卖家所有商品进行屏蔽",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_items_of_high_refund_seller_output/${latest}",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.VDIAN_BUYER",
+            "Market.VDIAN_MM",
+            "Market.GLOBAL",
+            "Market.WEIXIN_ACCOUNT",
+            "Market.BANJIA",
+            "Market.MINA"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "21"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 19,
+      "description": "外卖食品类商品屏蔽",
+      "description-detail": "在中心化买家市场中对外卖食品的商品进行屏蔽",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_item_takeout/${latest}",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.VDIAN_BUYER",
+            "Market.WEIXIN_ACCOUNT",
+            "Market.MINA"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "22"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 20,
+      "description": "外卖食品类店铺进行屏蔽",
+      "description-detail": "在中心化买家市场中对外卖食品的店铺进行屏蔽",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_seller_takeout/${latest}",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.SELLER"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.VDIAN_BUYER",
+            "Market.WEIXIN_ACCOUNT",
+            "Market.MINA"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "23"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 21,
+      "description": "店铺白名单作用到商品上",
+      "description-detail": "店铺白名单作用到商品上",
+      "input-path": "hdfs://argo/user/www/ods/ods_item_info/${latest}",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "12"
+          ]
+        },
+        {
+          "name": "contributor",
+          "interpreter": "ShopWhiteContributor",
+          "arguments": [
+            "9",
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 22,
+      "description": "低价假货商品屏蔽",
+      "description-detail": "根据外网价格对价格差异较大的嫌疑假货，高仿奢侈品商品进行屏蔽",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dt_low_price_item_compare_intime_315",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "24"
+          ]
+        }
+      ]
+    },
+    {
+      "rule-id": 23,
+      "description": "新假货商品屏蔽",
+      "description-detail": "风控知假卖假商品",
+      "input-path": "hdfs://argo/user/hive/warehouse/hzsearch.db/r_dd_fake_item_keyword_output/${latest}",
+      "apply-punish-history": false,
+      "variables": [
+        {
+          "name": "targetId",
+          "interpreter": "InputLong",
+          "arguments": [
+            "0"
+          ]
+        },
+        {
+          "name": "targetType",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "TargetType.ITEM"
+          ]
+        },
+        {
+          "name": "market",
+          "interpreter": "ConstEnum",
+          "arguments": [
+            "Market.ALL"
+          ]
+        },
+        {
+          "name": "startTime",
+          "interpreter": "CurrentTime",
+          "arguments": []
+        },
+        {
+          "name": "punishCaseId",
+          "interpreter": "ConstLong",
+          "arguments": [
+            "25"
+          ]
+        }
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "key": "mapreduce.input.fileinputformat.input.dir.recursive",
+      "value": "true"
+    },
+    {
+      "key": "mapreduce.job.queuename",
+      "value": "di"
+    }
+  ],
+  "num-reduce": 60,
+  "punish-case-path": "/user/hive/warehouse/hzsearch.db/fox/punish_case/${latest}/",
+  "output-path": "/data/result/hive/hzsearch/vitem/antispam-v2/result/${date:yyyyMMdd,-1}",
+  "history-path": "/data/result/hive/hzsearch/vitem/antispam-v2/result/${date:yyyyMMdd,-2}/history",
+  "delete-sibling-output": true
+}

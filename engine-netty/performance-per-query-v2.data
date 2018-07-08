@@ -1,0 +1,94 @@
+
+1. 1个查询线程,10w文档
+------------------------------------------------------------------------------------
+
+netty
+----------------------------------------------------------------
+queryCount:			20000
+queryCost:			70953ms
+query RT:			3.54765ms
+avgNumFound:		23909
+cost:				70966
+qps:				281.8251
+
+Http-Client-PerThread
+----------------------------------------------------------------
+queryCount:			20000
+queryCost:			111062ms
+query RT:			5.5531ms
+avgNumFound:		23833
+cost:				111295
+qps:				179.70259
+
+Http-Client-PerQuery
+----------------------------------------------------------------
+queryCount:			20000
+queryCost:			82139ms
+query RT:			4.10695ms
+avgNumFound:		23833
+cost:				82140
+qps:				243.48672
+
+
+2. 5个查询线程,10w文档
+------------------------------------------------------------------------------------
+
+netty
+----------------------------------------------------------------
+queryCount:			20000
+queryCost:			149494ms
+query RT:			7.4747ms
+avgNumFound:		23909
+cost:				30357
+qps:				658.82666
+
+Http-Client-PerThread
+----------------------------------------------------------------
+queryCount:			20000
+queryCost:			179670ms
+query RT:			8.9835ms
+avgNumFound:		23833
+cost:				36079
+qps:				554.3391
+
+Http-Client-PerQuery
+----------------------------------------------------------------
+queryCount:			20000
+queryCost:			177485ms
+query RT:			8.87425ms
+avgNumFound:		23833
+cost:				35526
+qps:				562.96796
+
+
+3. 10个查询线程,10w文档
+------------------------------------------------------------------------------------
+
+Http-Client-PerThread
+----------------------------------------------------------------
+queryCount:			20000
+queryCost:			297961ms
+query RT:			14.89805ms
+avgNumFound:		23833
+cost:				29983
+qps:				667.0447
+
+netty
+----------------------------------------------------------------
+queryCount:			20000
+queryCost:			270075ms
+query RT:			13.50375ms
+avgNumFound:		23909
+cost:				28180
+qps:				709.7232
+
+Http-Client-PerQuery
+----------------------------------------------------------------
+queryCount:			20000
+queryCost:			334384ms
+query RT:			16.7192ms
+avgNumFound:		23833
+cost:				33579
+qps:				595.61035
+
+Process finished with exit code 0

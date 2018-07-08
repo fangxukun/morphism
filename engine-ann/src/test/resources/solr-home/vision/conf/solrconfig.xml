@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+
+    <luceneMatchVersion>5.2.1</luceneMatchVersion>
+
+    <dataDir>${solr.data.dir:}</dataDir>
+
+    <directoryFactory name="DirectoryFactory"
+                      class="${solr.directoryFactory:solr.NRTCachingDirectoryFactory}">
+    </directoryFactory>
+
+    <codecFactory class="solr.SchemaCodecFactory"/>
+
+    <schemaFactory class="ClassicIndexSchemaFactory"/>
+
+    <indexConfig>
+        <lockType>${solr.lock.type:native}</lockType>
+        <infoStream>true</infoStream>
+        <mergeFactor>25</mergeFactor>
+        <ramBufferSizeMB>80</ramBufferSizeMB>
+        <maxIndexingThreads>1</maxIndexingThreads>
+    </indexConfig>
+
+    <updateHandler class="solr.DirectUpdateHandler2">
+    </updateHandler>
+    x
+    <initParams path="/update/**,/query,/select,/tvrh,/elevate,/spell">
+        <lst name="defaults">
+            <str name="df">text</str>
+        </lst>
+    </initParams>
+
+    <requestHandler name="/select" class="solr.SearchHandler">
+        <lst name="defaults">
+            <str name="echoParams">explicit</str>
+            <int name="rows">10</int>
+            <str name="df">item_title</str>
+        </lst>
+    </requestHandler>
+
+    <requestHandler name="/update" class="solr.UpdateRequestHandler">
+        <lst name="defaults">
+            <str name="update.chain">versionConstraints</str>
+        </lst>
+    </requestHandler>
+
+    <updateRequestProcessorChain name="versionConstraints">
+        <processor class="solr.LogUpdateProcessorFactory"/>
+        <processor class="solr.DistributedUpdateProcessorFactory"/>
+        <processor class="solr.RunUpdateProcessorFactory"/>
+    </updateRequestProcessorChain>
+
+
+    <valueSourceParser name="annParser" class="com.vdian.search.ann.lucene.function.AnnValueSourceParser" />
+    <queryParser name="ann" class="com.vdian.search.ann.lucene.query.AnnQParserPlugin"/>
+
+    <!-- Legacy config for the admin interface -->
+    <admin>
+        <defaultQuery>*:*</defaultQuery>
+    </admin>
+
+</config>

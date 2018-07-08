@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.vdian.search</groupId>
+    <artifactId>engine-field-dump</artifactId>
+    <version>${engine.version}</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>com.vdian.search</groupId>
+        <artifactId>engine-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../engine-parent/pom.xml</relativePath>
+    </parent>
+
+
+    <name>engine-field-dump</name>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.koudai.rio</groupId>
+            <artifactId>rio-commons</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vdian.ergate</groupId>
+            <artifactId>meta-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vdian.search</groupId>
+            <artifactId>engine-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vdian.search</groupId>
+            <artifactId>engine-netty</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vdian.ikanalyzer</groupId>
+            <artifactId>IK-Analyzer</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

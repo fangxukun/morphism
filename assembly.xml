@@ -1,0 +1,17 @@
+<assembly>
+    <id>bin</id>
+    <baseDirectory>${finalName}.war</baseDirectory>
+    <formats>
+        <format>tgz</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>engine-server/target/exploded/${finalName}.war</directory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

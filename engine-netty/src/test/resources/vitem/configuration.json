@@ -1,0 +1,34 @@
+{
+    "service-name": "vitem",
+    "zookeeper": "10.1.100.75:2181,10.1.100.76:2181,10.1.100.77:2181",
+    "solr-xml": "solr.common",
+    "application": "private-cluster",
+    "data-home": "/data/data_home_netty/",
+    "solr-home": "/data/solr_home_netty/",
+    "http-port": 8080,
+    "netty-port": 8006,
+    "netty-server":{
+        "port":8006,
+        "boss-thread-num":1,
+        "work-thread-num":30,
+        "search-worker-size":500,
+        "worker-poll-timeout":500
+    },
+    "cores": [
+        {
+            "core-name": "vitem",
+            "schema-xml": "schema.vitem.vitem",
+            "solr-config-xml": "solrConfig.vitem.vitem"
+        }
+    ],
+    "engine-matrix": [
+        {
+            "shard-id": 0,
+            "engines": [
+                "10.1.100.196",
+                "10.1.100.157",
+                "169.254.80.196"
+            ]
+        }
+    ]
+}

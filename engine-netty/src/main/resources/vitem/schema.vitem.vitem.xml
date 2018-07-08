@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema name="vitem" version="1.1">
+    <uniqueKey>item_id</uniqueKey>
+    <solrQueryParser defaultOperator="AND"/>
+
+    <types>
+        <fieldType class="solr.TrieLongField" name="long" positionIncrementGap="0" precisionStep="0"/>
+        <fieldType name="float" class="solr.TrieFloatField" precisionStep="0" positionIncrementGap="0"/>
+    </types>
+
+    <fields>
+        <field docValues="false" indexed="true" multiValued="false" name="_version_" required="false" stored="true"
+               type="long"/>
+        <field docValues="false" indexed="true" multiValued="false" name="item_id" required="true" stored="true"
+               type="long"/>
+        <field docValues="true" indexed="true" multiValued="false" name="item_score" required="true" stored="true"
+               type="float"/>
+    </fields>
+</schema>
